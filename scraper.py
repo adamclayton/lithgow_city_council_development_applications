@@ -10,6 +10,7 @@ import urllib2
 import lxml.html
 from splinter import Browser
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 
 def getrecord(html):
   date_scraped = time.strftime('%Y-%m-%d')
@@ -57,7 +58,11 @@ scrape_url='https://eservices.lithgow.nsw.gov.au/ePropertyProd/P1/eTrack/eTrackA
 
 
 # browser/scraper
-with Browser('chrome', headless=True, load_images=False) as browser:
+options = Options()
+options.add_argument('--disable-extensions')
+options.add_argument('--no-sandbox')
+
+with Browser('chrome', headless=True, options=options) as browser:
   browser.driver.set_page_load_timeout(300)
   try:
     browser.visit(scrape_url)
