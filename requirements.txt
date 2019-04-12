@@ -7,5 +7,5 @@
 
 lxml==3.4.4
 cssselect==0.9.1
-splinter>=0.7.3
+splinter~=0.7.3
 six
