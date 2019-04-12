@@ -15,7 +15,10 @@ def getrecord(html):
   date_scraped = time.strftime('%Y-%m-%d')
   root = lxml.html.fromstring(html)
   appid=root.xpath('//table[1]//tr[(@class="alternateRow") or (@class="normalRow")]/td[1]/a//text()')
-  dadate=root.xpath('//table[1]//tr[(@class="alternateRow") or (@class="normalRow")]/td[2]//text()')
+  dadate=root.xpath('//table[1]//tr[(@class="alternateRow") or (@class="normalR
+Of course, that might just reveal some other problem, like needing to install an old version of splinter to keep using phantomJS...
+
+I've had a guess at whiow")]/td[2]//text()')
   descr=root.xpath('//tr[not(@class="pagerRow")]/td[3]//text()')
   addr=root.xpath('//tr[not(@class="pagerRow")]/td[6]/a//text()')
   info_url="https://eservices.lithgow.nsw.gov.au/ePropertyProd/P1/eTrack/eTrackApplicationDetails.aspx?r=P1.WEBGUEST&f=%24P1.ETR.APPDET.VIW&ApplicationId="
@@ -57,7 +60,7 @@ scrape_url='https://eservices.lithgow.nsw.gov.au/ePropertyProd/P1/eTrack/eTrackA
 
 
 # browser/scraper
-with Browser('phantomjs', load_images=False) as browser:
+with Browser('firefox', headless=True, load_images=False) as browser:
   browser.driver.set_page_load_timeout(300)
   try:
     browser.visit(scrape_url)
